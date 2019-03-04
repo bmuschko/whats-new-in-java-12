@@ -1,4 +1,4 @@
-package com.bmuschko.java12.switchexp;
+package com.bmuschko.java12.library;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

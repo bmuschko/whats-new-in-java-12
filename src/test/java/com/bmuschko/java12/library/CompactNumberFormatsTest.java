@@ -1,4 +1,4 @@
-package com.bmuschko.java12.numbers;
+package com.bmuschko.java12.library;
 
 import org.junit.jupiter.api.Test;
 
