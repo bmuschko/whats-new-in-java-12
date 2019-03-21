@@ -12,6 +12,24 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SwitchExpressionTest {
+    @DisplayName("Can use traditional switch statement")
+    @ParameterizedTest
+    @MethodSource("storageTypes")
+    void canUseSwitchStatement(StorageType storageType, String target)
+            throws URISyntaxException {
+        URI result;
+
+        switch (storageType) {
+            case LOCAL_FILE: result = new URI("file://~/storage");
+                             break;
+            case CLOUD: result = new URI("http://mycloud.com/data");
+                        break;
+            default: throw new IllegalArgumentException("Unknown storage type");
+        }
+
+        assertEquals(new URI(target), result);
+    }
+
     @DisplayName("Can use switch arrow syntax and avoid break statement")
     @ParameterizedTest
     @MethodSource("storageTypes")
@@ -33,11 +51,11 @@ public class SwitchExpressionTest {
             throws URISyntaxException {
         URI result = switch (storageType) {
             case LOCAL_FILE -> {
-                System.out.println("Retrieving local file storage URI");
+                System.out.println("Retrieving the local file storage URI");
                 break new URI("file://~/storage");
             }
             case CLOUD -> {
-                System.out.println("Retrieving cloud storage URI");
+                System.out.println("Retrieving the cloud storage URI");
                 break new URI("http://mycloud.com/data");
             }
             default -> throw new IllegalArgumentException("Unknown storage type");
@@ -46,15 +64,15 @@ public class SwitchExpressionTest {
         assertEquals(new URI(target), result);
     }
 
+    private enum StorageType {
+        LOCAL_FILE,
+        CLOUD
+    }
+
     private static Stream<Arguments> storageTypes() {
         return Stream.of(
                 Arguments.of(StorageType.LOCAL_FILE, "file://~/storage"),
                 Arguments.of(StorageType.CLOUD, "http://mycloud.com/data")
         );
-    }
-
-    private enum StorageType {
-        LOCAL_FILE,
-        CLOUD
     }
 }
