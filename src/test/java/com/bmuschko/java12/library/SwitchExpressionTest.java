@@ -15,9 +15,11 @@ public class SwitchExpressionTest {
     @DisplayName("Can use switch arrow syntax and avoid break statement")
     @ParameterizedTest
     @MethodSource("storageTypes")
-    void canUseSwitchArrowSyntaxToAvoidBreakStatement(StorageType storageType, String target) throws URISyntaxException {
+    void canUseSwitchArrowSyntaxToAvoidBreakStatement(StorageType storageType, String target)
+            throws URISyntaxException {
         URI result = switch (storageType) {
-            case LOCAL_FILE, CLOUD -> storageType.getTarget();
+            case LOCAL_FILE -> new URI("file://~/storage");
+            case CLOUD -> new URI("http://mycloud.com/data");
             default -> throw new IllegalArgumentException("Unknown storage type");
         };
 
@@ -27,20 +29,18 @@ public class SwitchExpressionTest {
     @DisplayName("Can use switch arrow syntax and break with return value")
     @ParameterizedTest
     @MethodSource("storageTypes")
-    void canUseSwitchArrowSyntaxAndReturnWithBreakStatement(StorageType storageType, String target) throws URISyntaxException {
+    void canUseSwitchArrowSyntaxAndReturnWithBreakStatement(StorageType storageType, String target)
+            throws URISyntaxException {
         URI result = switch (storageType) {
             case LOCAL_FILE -> {
-                System.out.println("Handling local file storage type");
-                break storageType.getTarget();
+                System.out.println("Retrieving local file storage URI");
+                break new URI("file://~/storage");
             }
             case CLOUD -> {
-                System.out.println("Handling cloud storage type");
-                break storageType.getTarget();
+                System.out.println("Retrieving cloud storage URI");
+                break new URI("http://mycloud.com/data");
             }
-            default -> {
-                System.out.println("Fallthrough storage type");
-                throw new IllegalArgumentException("Unknown storage type");
-            }
+            default -> throw new IllegalArgumentException("Unknown storage type");
         };
 
         assertEquals(new URI(target), result);
@@ -54,21 +54,7 @@ public class SwitchExpressionTest {
     }
 
     private enum StorageType {
-        LOCAL_FILE("file://~/storage"),
-        CLOUD("http://mycloud.com/data");
-
-        private final URI target;
-
-        StorageType(String target) {
-            try {
-                this.target = new URI(target);
-            } catch (URISyntaxException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        public URI getTarget() {
-            return target;
-        }
+        LOCAL_FILE,
+        CLOUD
     }
 }
