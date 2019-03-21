@@ -17,8 +17,8 @@ public class SwitchExpressionTest {
     @MethodSource("storageTypes")
     void canUseSwitchArrowSyntaxToAvoidBreakStatement(StorageType storageType, String target) throws URISyntaxException {
         URI result = switch (storageType) {
-            case LOCAL_FILE -> result = storageType.getTarget();
-            case CLOUD -> result = storageType.getTarget();
+            case LOCAL_FILE -> storageType.getTarget();
+            case CLOUD -> storageType.getTarget();
             default -> throw new IllegalArgumentException("Unknown storage type");
         };
 
