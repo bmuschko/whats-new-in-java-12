@@ -20,7 +20,7 @@ public class TeeingCollectorTest {
         assertEquals("Salaries range between 45200 and 120000.", salaryRange.toString());
     }
 
-    public static class SalaryRange {
+    private static class SalaryRange {
         private final Integer min;
         private final Integer max;
 
