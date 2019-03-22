@@ -1,6 +1,9 @@
 build
 target
 out
+bin
 .gradle
 .idea
+.project
+.classpath
 .DS_Store
