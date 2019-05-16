@@ -4,7 +4,7 @@
 <br>
 <img align="left" role="left" src="https://covers.oreillystatic.com/images/0636920282594/lrg.jpg" width="110" alt="Book Cover" />
 ++++
-Source code for the book https://learning.oreilly.com/library/view/whats-new-in/9781492058243/["What's New in Java 12?"], A Quick Start Reference to the Long Term Support Release, published by Benjamin Muschko for O'Reilly Media Inc.
+Source code for the book https://learning.oreilly.com/library/view/whats-new-in/9781492058243/["What's New in Java 12?"], A Developer-Focused Guide to the Latest Features and JVM Changes, published by Benjamin Muschko for O'Reilly Media Inc.
 
 Demonstrates some of the new features and library changes in Java 12 in a test-driven approach with JUnit 5. All test cases live in `src/test/java`. The main source code under `src/main/java` contains examples that demonstrate the use of open source libraries as a replacement for the removed Java EE modules.
 
